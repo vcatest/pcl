@@ -38,7 +38,7 @@ jobs:
         run: |
           echo "token : ${{ vars.EMBOLD_TOKEN_CPP }}"
           curl --silent --location --request GET "${{ vars.EMBOLD_URL_CPP }}/api/v1/repositories/${{ env.EMBOLD_REPO_ID }}/scans/config/download" \
-               --header "Authorization: Bearer  ${{ secrets.EMBOLD_TOKEN_CPP }}" \
+               --header "Authorization: Bearer  ${{ vars.EMBOLD_TOKEN_CPP }}" \
                -o repository-configuration.json
 
       # Step 7: Run the Embold analysis scanner
@@ -48,7 +48,7 @@ jobs:
           echo "Starting Embold analysis..."
           ./browserstack-codequality-scanner/bin/embold-scanner analyse \
             -u ${{ vars.EMBOLD_URL_CPP }} \
-            -t ${{ secrets.EMBOLD_TOKEN_CPP }} \
+            -t ${{ vars.EMBOLD_TOKEN_CPP }} \
             -r ${{ env.EMBOLD_REPO_ID }} \
             -b . \
             -d ./embold-data \
